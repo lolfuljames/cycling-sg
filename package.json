@@ -23,6 +23,8 @@
     "express": "^4.17.1",
     "mongoose": "^5.10.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
   "description": ""
 }
