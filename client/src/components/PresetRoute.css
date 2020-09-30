@@ -1,0 +1,25 @@
+.presetRoute {
+    color: red;
+    box-shadow: 0 2px 6px gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    margin: 10px 0 0 10px;
+}
+
+
+.routeAttribute {
+    padding: 8px;
+}
+
+.routeName {
+    flex: 3 1 0;
+}
+.routeDistance {
+    flex: 1 1 0;
+}
+.routeCalories {
+    flex: 1 1 0;
+}

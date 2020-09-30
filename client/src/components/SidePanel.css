@@ -18,15 +18,15 @@
 
 #custom-route-transition-button {
     position: relative;
-    float: right;
-    top: -31px;
+    left: max(140px, 20%);
+    /* float: right; */
+    /* top: -35px; */
     border-radius: 100px;
     box-shadow: 0 2px 6px gray;
-    border: 1px;
-    padding-top: 6px;
-    background: lightcyan;
+    /* background: #33AC94;
+    color: white; */
 }
 
 #side-panel-title {
-    font-size: 31px;
+    font-size: 41px;
 }
