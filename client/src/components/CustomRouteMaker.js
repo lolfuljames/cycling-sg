@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import AutocompleteInput from './AutocompleteInput'
 import './CustomRouteMaker.css'
 
-export default function CustomRouteMaker() {
-    const [startLocation, setStartLocation] = useState(null);
-    const [endLocation, setEndLocation] = useState(null);
 
-    console.log(startLocation);
-    console.log(endLocation);
+
+export default function CustomRouteMaker(props) {
+    const [setStartLocation, setEndLocation] = props.handlers;
     return (
         <div>
             <div id="start-pac">
