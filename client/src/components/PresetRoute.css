@@ -1,9 +1,9 @@
 .presetRoute {
-    color: red;
+    /* color: red; */
     box-shadow: 0 2px 6px gray;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; */
     border-radius: 10px;
     background-color: #f9f9f9;
     margin: 10px 0 0 0;

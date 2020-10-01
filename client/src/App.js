@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
@@ -20,11 +20,12 @@ const theme = createMuiTheme({
 });
 
 function App() {
+  const [chosenRoute, setChosenRoute] = useState(null);
 
   return (
     <div>
       <Maps/>
-      <SidePanel/>
+      <SidePanel handlers={[setChosenRoute]}/>
       {/* <div className="container">
         <h2>MERN-Stack Test App</h2>
       </div>

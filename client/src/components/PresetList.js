@@ -1,6 +1,5 @@
 import React from 'react'
 import PresetRoute from './PresetRoute'
-import Button from '@material-ui/core/Button'
 import './PresetList.css'
 
 export default function PresetList( {presetList}) {

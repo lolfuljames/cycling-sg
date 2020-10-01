@@ -10,6 +10,7 @@ const center = {
   lat: 1.3878,
   lng: 103.8266
 };
+const libraries = ["places"]
 
 export default function Maps() {
   const [map, setMap] = React.useState(null)
@@ -24,11 +25,10 @@ export default function Maps() {
     setMap(null)
   }, [])
 
-  console.log('done')
-
   return (
     <LoadScript
-      googleMapsApiKey="AIzaSyDXyYgpyHPB77RyblUo6jF7WDMLfH0VeS0"
+      googleMapsApiKey="AIzaSyDXyYgpyHPB77RyblUo6jF7WDMLfH0VeS0" 
+      libraries={libraries}
     >
       <GoogleMap
         mapContainerStyle={containerStyle}
