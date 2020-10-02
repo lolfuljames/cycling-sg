@@ -9,6 +9,9 @@
     margin: 10px 0 0 0;
 }
 
+.active-preset-route {
+    background-color: rgb(168, 148, 255);
+}
 
 .routeAttribute {
     padding: 8px;

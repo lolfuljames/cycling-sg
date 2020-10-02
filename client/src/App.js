@@ -24,8 +24,8 @@ function App() {
 
   return (
     <div>
-      <Maps/>
-      <SidePanel handlers={[setChosenRoute]}/>
+      <Maps route={chosenRoute} />
+      <SidePanel handlers={[chosenRoute, setChosenRoute]}/>
       {/* <div className="container">
         <h2>MERN-Stack Test App</h2>
       </div>
