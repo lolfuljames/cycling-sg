@@ -6,6 +6,7 @@ import './CustomRouteMaker.css'
 
 export default function CustomRouteMaker(props) {
     const [setStartLocation, setEndLocation] = props.handlers;
+
     return (
         <div>
             <div id="start-pac">

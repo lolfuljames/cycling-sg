@@ -13,8 +13,6 @@ class AutocompleteInput extends Component {
   }
 
   onLoad (autocomplete) {
-    console.log('autocomplete: ', autocomplete)
-
     this.autocomplete = autocomplete
   }
 

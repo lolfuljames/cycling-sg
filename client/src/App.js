@@ -21,11 +21,13 @@ const theme = createMuiTheme({
 
 function App() {
   const [chosenRoute, setChosenRoute] = useState(null);
+  const [startLocation, setStartLocation] = useState(null);
+  const [endLocation, setEndLocation] = useState(null);
 
   return (
     <div>
-      <Maps route={chosenRoute} />
-      <SidePanel handlers={[chosenRoute, setChosenRoute]}/>
+      <Maps route={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation, setEndLocation]}/>
+      <SidePanel handlers={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation,setEndLocation]}/>
       {/* <div className="container">
         <h2>MERN-Stack Test App</h2>
       </div>

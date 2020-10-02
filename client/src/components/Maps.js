@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { GoogleMap, LoadScript, Data } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Data, Marker } from '@react-google-maps/api';
 
 const containerStyle = {
   width: "100%",
@@ -26,7 +26,9 @@ function processPoints(geometry, callback, thisArg) {
 }
 
 export default function Maps(props) {
-  const route = props.route
+  const [route, setRoute] = props.route
+  const [startLocation, setStartLocation] = props.startLocation
+  const [endLocation, setEndLocation] = props.endLocation
   const [map, setMap] = React.useState(null)
   const [data, setData] = React.useState(null)
   const [features, setFeatures] = React.useState(null)
@@ -39,7 +41,6 @@ export default function Maps(props) {
   }, [])
 
   useEffect(() => {
-    console.log("effect called")
     if (features) {
       for (var i = 0; i < features.length; i++)
         data.remove(features[i]);
@@ -50,14 +51,38 @@ export default function Maps(props) {
     }
   }, [route])
 
+  useEffect(() => {
+    console.log("Start Location: ", startLocation)
+  }, [startLocation])
+
+  useEffect(() => {
+    console.log("End Location: ", endLocation)
+  }, [endLocation])
+
   const onLoadData = data => {
     setData(data)
-    console.log("loaded data")
   }
+
+  const handleDragStartLocation = marker => {
+    setStartLocation({
+      lat: marker.latLng.lat(),
+      lng: marker.latLng.lng()
+    })
+    if (route) setRoute(null)
+  }
+
+  const handleDragEndLocation = marker => {
+    setEndLocation({
+      lat: marker.latLng.lat(),
+      lng: marker.latLng.lng()
+    })
+    if (route) setRoute(null)
+  }
+
 
   // function that runs whenever new route is selected
   const onAddFeatureData = e => {
-    console.log("added featuredata: ", e)
+    console.log("Added Route: ", e)
     var bounds = new window.google.maps.LatLngBounds();
     processPoints(e.feature.getGeometry(), bounds.extend, bounds);
     map.fitBounds(bounds);
@@ -83,6 +108,10 @@ export default function Maps(props) {
         { /* Child components, such as markers, info windows, etc. */}
         <>
           <Data onLoad={onLoadData} onAddFeature={onAddFeatureData}/>
+          {/* <Marker position={startLocation} draggable/> */}
+          {/* <Marker position={endLocation} draggable/> */}
+          <Marker position={startLocation} draggable onDragEnd={handleDragStartLocation}/>
+          <Marker position={endLocation} draggable onDragEnd={handleDragEndLocation}/>
         </>
       </GoogleMap>
     </LoadScript>

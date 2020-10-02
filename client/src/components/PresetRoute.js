@@ -5,11 +5,13 @@ import Button from '@material-ui/core/Button'
 
 
 export default function PresetRoute( {route, handlers}) {
-    const [chosenRoute, setChosenRoute] = handlers
+    const [chosenRoute, setChosenRoute, setStartLocation, setEndLocation] = handlers
     const [className, setClass] = useState("presetRoute")
 
     function handleClickPreset() {
         setChosenRoute(route.json)
+        setStartLocation(route.startLocation)
+        setEndLocation(route.endLocation)
         console.log("Route chosen: ", route.name)
     }
 
@@ -17,13 +19,10 @@ export default function PresetRoute( {route, handlers}) {
     const inactiveClass = "presetRoute"
 
     useEffect(() => {
-        console.log("doing effect button")
         if (chosenRoute && chosenRoute === route.json && className !== activeClass) {
             setClass(activeClass)
-            console.log("active yo!")
         } else if (className !== inactiveClass) {
             setClass(inactiveClass)
-            console.log(route.name, ": inactive now")
         }
     }, [chosenRoute])
 
