@@ -1,0 +1,19 @@
+#start-pac {
+    position: relative;
+    top: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+#end-pac {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    top: 300px;
+    /* margin: 40px; */
+}
+
+.pac-title {
+    position: relative;
+    top: -30px;
+}

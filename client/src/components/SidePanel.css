@@ -1,0 +1,51 @@
+#side-panel-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#side-panel {
+    position: relative;
+    top: 2.5vh;
+    left: 15px;
+    box-shadow: 0 2px 6px gray;
+    background: white;
+    width: max(300px, 20%);
+    height: 85vh;
+    border-radius: 25px;
+    padding: 20px;
+}
+
+#custom-route-transition-button {
+    position: relative;
+    left: max(140px, 20%);
+    /* float: right; */
+    /* top: -35px; */
+    border-radius: 100px;
+    box-shadow: 0 2px 6px gray;
+    /* background: #33AC94;
+    color: white; */
+}
+
+
+#preset-route-transition-button {
+    /* position: relative; */
+    /* left: max(140px, 20%); */
+    /* float: right; */
+    /* top: -35px; */
+    border-radius: 100px;
+    box-shadow: 0 2px 6px gray;
+    /* background: #33AC94;
+    color: white; */
+}
+
+#side-panel-title {
+    font-size: 41px;
+}
+
+#search-route-button {
+    float: right;
+    position: relative;
+    top: 70vh;
+    border-radius: 300px;
+}
