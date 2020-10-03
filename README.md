@@ -10,6 +10,9 @@ A web app that recommends you routes or let you plan your own custom routes for 
 ### 2. Install required packages for backend  
 - Open a command prompt in `cycling-sg` directory  
 - Run the command: `npm install`
+- Run the command: `npm install @material-ui/core`
+- Run the command: `npm install @material-ui/icons`
+- Run the command: `npm install -S @react-google-maps/api`
 
 ### 3. Install required packages for frontend  
 - Open a command prompt in `cycling-sg/client` directory  
