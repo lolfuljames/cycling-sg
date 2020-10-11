@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const path = require('path');
 
 const cors = require('cors');
@@ -8,18 +8,31 @@ const mongoose = require('mongoose');
 const testRoutes = express.Router();
 const PORT = process.env.PORT || 4000;
 
-const config = require('./config/key');
-const MONGODB_URI = config.mongodbURI;
-const log = console.log;
+const { MONGODB_URI, LOG_LEVEL } = require('./config');
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
-    .then(() => log("MongoDB database connection established successfully."))
-    .catch(err => log(err));
+const pino = require('pino');
+const expressPino = require('express-pino-logger');
+const logger = pino({
+    level: LOG_LEVEL || 'info',
+    prettyPrint: {
+        colorize: true,
+        translateTime: 'SYS:standard'
+    }
+});
+const expressLogger = expressPino({ logger });
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => logger.debug("MongoDB database connection established successfully."))
+    .catch(err => logger.error(err));
 const connection = mongoose.connection;
 
+app.use(expressLogger);
 app.use(cors());
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+app.use(express.json());
 
+app.use('/poi', require('./routes/poiRoutes'));
+app.use('/preset', require('./routes/presetRoutes'));
 app.use('/test', require('./routes/testRoutes'));
 
 if (process.env.NODE_ENV === 'production') {
@@ -31,5 +44,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen(PORT, function() {
-    console.log("Server is running on Port: " + PORT);
+    logger.debug("Server is running on Port: " + PORT);
 });
