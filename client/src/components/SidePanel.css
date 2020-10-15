@@ -45,7 +45,8 @@
 
 #search-route-button {
     float: right;
-    position: relative;
-    top: 70vh;
+    position: absolute;
+    top: 83vh;
+    left: max(250px, 20%);
     border-radius: 300px;
 }

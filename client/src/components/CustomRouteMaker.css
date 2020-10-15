@@ -5,6 +5,12 @@
     justify-content: center;
 }
 
+#poi {
+    position: relative;
+    height: 20vh;
+    top: 5vh;
+}
+
 #end-pac {
     position: relative;
     display: flex;
@@ -16,4 +22,10 @@
 .pac-title {
     position: relative;
     top: -30px;
+}
+
+.MuiSpeedDial-actions {
+    position: relative;
+    left: 55px;
+    top: 125px;
 }
