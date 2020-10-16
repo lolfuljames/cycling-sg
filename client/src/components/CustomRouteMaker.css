@@ -24,8 +24,13 @@
     top: -30px;
 }
 
+.MuiSpeedDial-open {
+    position: relative;
+    right: 90px;
+}
+
 .MuiSpeedDial-actions {
     position: relative;
-    left: 55px;
+    left: 85px;
     top: 125px;
 }

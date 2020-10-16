@@ -13,14 +13,16 @@ const POITypes = [
 
 export default function CustomRouteMaker(props) {
     const [open, setOpen] = React.useState(false);
-
+    const [speedDialClassName, setSpeedDialClassName] = React.useState(null); 
     const [setStartLocation, setEndLocation, setPOIType] = props.handlers;
     
     const handleOpen = () => {
         setOpen(true);
+        setSpeedDialClassName('MuiSpeedDial-open');
     };
     const handleClose = () => {
         setOpen(false);
+        setSpeedDialClassName(null);
         };
 
     function handleSelect(selectedType) {
@@ -37,9 +39,11 @@ export default function CustomRouteMaker(props) {
                 <SpeedDial
                     ariaLabel="Place of Interest Type SpeedDial"
                     icon={<SpeedDialIcon />}
+                    className={speedDialClassName}
                     onClose={handleClose}
                     onOpen={handleOpen}
                     open={open}
+                    transitionDuration={800}
                 >
                     {POITypes.map((type) => (
                     <SpeedDialAction
