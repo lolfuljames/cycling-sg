@@ -33,11 +33,12 @@ const getRouteGeoJSON = coordinates => {
 const getPOIs = coordinates => axios.post('/poi/poiRec', { coordinates: coordinates })
 
 export default function SidePanel(props) {
-    const [chosenRoute, setChosenRoute] = props.handlers
+    const [chosenRoute, setChosenRoute] = props.chosenRoute
     const [startLocation, setStartLocation] = props.startLocation
     const [endLocation, setEndLocation] = props.endLocation
     const [presetList, setPresetList] = useState([]);
     const [mode, setMode] = useState('preset')
+    const [POIType, setPOIType] = props.POIType;
 
     // Fetch preset route from database through backend and populate presetList on init
     useEffect(() => {
@@ -107,7 +108,7 @@ export default function SidePanel(props) {
                         {/* Routes */}
                     </div>
                     <Button id="preset-route-transition-button" onClick={handleChangeButton} variant="contained" color="primary"><ArrowBack/>Back</Button>
-                    <CustomRouteMaker handlers={[setStartLocation, setEndLocation]}/>
+                    <CustomRouteMaker handlers={[setStartLocation, setEndLocation, setPOIType]}/>
                     <Button id="search-route-button" onClick={handleSearchCustomRoute} color="primary" variant="contained" component="span">
                         <Search />
                     </Button>
