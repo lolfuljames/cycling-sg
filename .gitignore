@@ -3,3 +3,6 @@ node_modules
 
 # Ignore server/config/dev.js
 server/config/dev.js
+
+# Ignore .env
+.env
