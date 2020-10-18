@@ -1,22 +1,35 @@
 #start-pac {
     position: relative;
-    top: 60px;
+    top: 40px;
     display: flex;
     justify-content: center;
-}
-
-#poi {
-    position: relative;
-    height: 20vh;
-    top: 5vh;
 }
 
 #end-pac {
     position: relative;
     display: flex;
     justify-content: center;
-    top: 300px;
+    top: 65vh;
     /* margin: 40px; */
+}
+
+#add-poi {
+    position: absolute;
+    top: 100px;
+    left: max(313px, 20%);
+}
+
+#search-route-button {
+    float: right;
+    position: absolute;
+    top: 83vh;
+    left: max(250px, 20%);
+    border-radius: 300px;
+}
+
+#poi-container {
+    position: relative;
+    top: 50px;
 }
 
 .pac-title {

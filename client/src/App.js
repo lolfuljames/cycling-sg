@@ -29,13 +29,8 @@ function App() {
 
   return (
     <div>
-      <Maps route={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation, setEndLocation]}/>
-      <SidePanel POIType={[POIType, setPOIType]} chosenRoute={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation,setEndLocation]}/>
-      {/* <div className="container">
-        <h2>MERN-Stack Test App</h2>
-      </div>
-      <Route path='/' exact component={Test} /> */}
-      {/* <Route path='/test/edit:id' exact component={Test} /> */}
+      <Maps chosenPOI={[chosenPOI, setChosenPOI]} recPOI={[recPOI, setRecPOI]} POIType={[POIType, setPOIType]} route={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation, setEndLocation]}/>
+      <SidePanel chosenPOI={[chosenPOI, setChosenPOI]} recPOI={[recPOI, setRecPOI]} POIType={[POIType, setPOIType]} chosenRoute={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation,setEndLocation]}/>
     </div>
   );
 }

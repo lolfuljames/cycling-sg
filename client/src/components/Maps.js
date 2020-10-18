@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { GoogleMap, LoadScript, Data, Marker } from '@react-google-maps/api';
+import { LocalDining, FilterHdr, Store } from '@material-ui/icons'
 
 const containerStyle = {
   width: "100%",
@@ -29,6 +30,11 @@ export default function Maps(props) {
   const [route, setRoute] = props.route
   const [startLocation, setStartLocation] = props.startLocation
   const [endLocation, setEndLocation] = props.endLocation
+  const [recPOI, setRecPOI] = props.recPOI
+  const [POIType, setPOIType] = props.POIType
+  const [chosenPOI, setChosenPOI] = props.chosenPOI
+
+  
   const [map, setMap] = React.useState(null)
   const [data, setData] = React.useState(null)
   const [features, setFeatures] = React.useState(null)
@@ -40,6 +46,8 @@ export default function Maps(props) {
     map.fitBounds(bounds);
   }, [])
 
+
+  // runs this function if route changes
   useEffect(() => {
     if (features) {
       for (var i = 0; i < features.length; i++)
@@ -93,6 +101,20 @@ export default function Maps(props) {
     setMap(null)
   }, [])
 
+  function handleClickPOI(place) {
+    let index = chosenPOI.findIndex(chosenPlace => chosenPlace === place)
+    if (index === -1) {
+      // the POI has not been chosen
+      setChosenPOI([...chosenPOI, place])
+    } else {
+      // the POI was chosen previously, remove instead
+      let new_chosenPOI = [...chosenPOI]
+      new_chosenPOI.splice(index, 1)
+      setChosenPOI(new_chosenPOI)
+    }
+    setPOIType(null);
+  }
+
   return (
     <LoadScript
       googleMapsApiKey="AIzaSyDXyYgpyHPB77RyblUo6jF7WDMLfH0VeS0"
@@ -112,6 +134,12 @@ export default function Maps(props) {
           {/* <Marker position={endLocation} draggable/> */}
           <Marker position={startLocation} draggable onDragEnd={handleDragStartLocation}/>
           <Marker position={endLocation} draggable onDragEnd={handleDragEndLocation}/>
+          {recPOI.map(place => {
+                return <Marker key={place.place_id} position={place.geometry.location} icon={"rec_POI.svg"} title={place.name} onClick={() => handleClickPOI(place)}/>
+            })}
+          {chosenPOI.map(place => {
+                return <Marker key={place.place_id} position={place.geometry.location} title={place.name} onClick={() => handleClickPOI(place)}/>
+            })}
         </>
       </GoogleMap>
     </LoadScript>
