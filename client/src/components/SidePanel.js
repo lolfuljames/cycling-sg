@@ -10,7 +10,7 @@ import axios from 'axios';
  * Get route in GeoJSON format.
  * Returns an axios post request promise.
  * Post request response will be the route (located in data field) in GeoJSON format.
- * 
+ *  
  * @param {number[][]} coordinates - Array of coordinates including startLocation, endLocation and all POIs (in the format of [lng, lat])
  */
 const getRouteGeoJSON = coordinates => {
@@ -30,7 +30,7 @@ const getRouteGeoJSON = coordinates => {
  * 
  * @param {number[][]} coordinates - Array of coordinates which will be used to search for POIs (in the format of [lat, lng])
  */
-const getPOIs = coordinates => axios.post('/poi/poiRec', { coordinates: coordinates })
+const getPOIs = (coordinates, POIType) => axios.post('/poi/poiRec', { coordinates: coordinates, radius: 1500, type: POIType })
 
 export default function SidePanel(props) {
     const [chosenRoute, setChosenRoute] = props.chosenRoute
@@ -39,6 +39,8 @@ export default function SidePanel(props) {
     const [presetList, setPresetList] = useState([]);
     const [mode, setMode] = useState('preset')
     const [POIType, setPOIType] = props.POIType;
+    const [recPOI, setRecPOI] = props.recPOI
+    const [chosenPOI, setChosenPOI] = props.chosenPOI
 
     // Fetch preset route from database through backend and populate presetList on init
     useEffect(() => {
@@ -72,26 +74,32 @@ export default function SidePanel(props) {
         getRouteGeoJSON(coordinates).then(res => {
             setChosenRoute(res.data);
             console.log('Done generating route.');
+            // Add coordinates which will be used to perform nearby search into searchCoordinates. 
+            // --------------------------------------------------WARNING--------------------------------------------------
+            // | Only uncomment the code below when you need it for development as each call will be billed accordingly. |
+            // --------------------------------------------------WARNING--------------------------------------------------
+            if (POIType) {
+                let searchCoordinates = res.data.features[0].geometry.coordinates.map(coordinate => {
+                    return {lat: coordinate[1], lng: coordinate[0]}
+                })
+                searchCoordinates = searchCoordinates.filter((coordinate, index) => index % 100 === 0)
+                getPOIs(searchCoordinates, POIType).then(res => {
+                    console.log("POI: ", res.data);
+                    setRecPOI(res.data);
+                }).catch(err => {
+                    console.log(err);
+                })
+            }
         }).catch(err => {
             console.log(err);
         });
 
-        // Add coordinates which will be used to perform nearby search into searchCoordinates. 
-        let searchCoordinates = [{lat: startLocation.lat, lng: startLocation.lng}, {lat: endLocation.lat, lng: endLocation.lng}];
-        // --------------------------------------------------WARNING--------------------------------------------------
-        // | Only uncomment the code below when you need it for development as each call will be billed accordingly. |
-        // --------------------------------------------------WARNING--------------------------------------------------
-        // getPOIs(searchCoordinates).then(res => {
-        //     console.log(res);
-        // }).catch(err => {
-        //     console.log(err);
-        // })
     }
 
     if (mode === 'preset'){
         return (
             <div id="side-panel-container">
-                <div id="side-panel">
+                <div id="side-panel">   
                     <div id="side-panel-title">
                         {/* Routes */}
                     </div>
@@ -108,7 +116,7 @@ export default function SidePanel(props) {
                         {/* Routes */}
                     </div>
                     <Button id="preset-route-transition-button" onClick={handleChangeButton} variant="contained" color="primary"><ArrowBack/>Back</Button>
-                    <CustomRouteMaker handlers={[setStartLocation, setEndLocation, setPOIType]}/>
+                    <CustomRouteMaker chosenPOI={[chosenPOI, setChosenPOI]} handlers={[setStartLocation, setEndLocation, setPOIType]}/>
                     <Button id="search-route-button" onClick={handleSearchCustomRoute} color="primary" variant="contained" component="span">
                         <Search />
                     </Button>
