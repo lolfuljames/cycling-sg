@@ -148,6 +148,9 @@ export default function Maps(props) {
           {recPOI.map(place => {
                 return <Marker key={place.place_id} position={place.geometry.location} onClick={() => handleClickPOI(place)}/>
             })}
+          {chosenPOI.map(place => {
+                return <Marker key={place.place_id} position={place.geometry.location} onClick={() => handleClickPOI(place)}/>
+            })}
         </>
       </GoogleMap>
     </LoadScript>

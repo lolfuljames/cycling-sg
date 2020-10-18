@@ -70,7 +70,10 @@ export default function SidePanel(props) {
         }
         console.log('Generating route.....')
 
-        let coordinates = [[startLocation.lng, startLocation.lat], [endLocation.lng, endLocation.lat]];
+        let coordinates = chosenPOI.map(place => {
+            return [place.geometry.location.lng, place.geometry.location.lat];
+        });
+        coordinates = [[startLocation.lng, startLocation.lat], ...coordinates ,[endLocation.lng, endLocation.lat]];
         getRouteGeoJSON(coordinates).then(res => {
             setChosenRoute(res.data);
             console.log('Done generating route.');
@@ -79,6 +82,7 @@ export default function SidePanel(props) {
             // | Only uncomment the code below when you need it for development as each call will be billed accordingly. |
             // --------------------------------------------------WARNING--------------------------------------------------
             if (POIType) {
+                setPOIType(null);
                 let searchCoordinates = res.data.features[0].geometry.coordinates.map(coordinate => {
                     return {lat: coordinate[1], lng: coordinate[0]}
                 })
@@ -89,6 +93,8 @@ export default function SidePanel(props) {
                 }).catch(err => {
                     console.log(err);
                 })
+            } else {
+                setRecPOI([]);
             }
         }).catch(err => {
             console.log(err);
@@ -116,7 +122,7 @@ export default function SidePanel(props) {
                         {/* Routes */}
                     </div>
                     <Button id="preset-route-transition-button" onClick={handleChangeButton} variant="contained" color="primary"><ArrowBack/>Back</Button>
-                    <CustomRouteMaker chosenPOI={[chosenPOI, setChosenPOI]} handlers={[setStartLocation, setEndLocation, setPOIType]}/>
+                    <CustomRouteMaker POIType={[POIType, setPOIType]} chosenPOI={[chosenPOI, setChosenPOI]} handlers={[setStartLocation, setEndLocation]}/>
                     <Button id="search-route-button" onClick={handleSearchCustomRoute} color="primary" variant="contained" component="span">
                         <Search />
                     </Button>

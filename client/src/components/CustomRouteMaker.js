@@ -2,7 +2,8 @@ import React from 'react'
 import AutocompleteInput from './AutocompleteInput'
 import './CustomRouteMaker.css'
 import { SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab'
-import { LocalDining, FilterHdr, Store } from '@material-ui/icons'
+import { LocalDining, FilterHdr, Store, Clear } from '@material-ui/icons'
+import { Grid } from '@material-ui/core'
 import PlaceOfInterest from './PlaceOfInterest'
 
 
@@ -15,8 +16,9 @@ const POITypes = [
 export default function CustomRouteMaker(props) {
     const [open, setOpen] = React.useState(false);
     const [speedDialClassName, setSpeedDialClassName] = React.useState(null); 
-    const [setStartLocation, setEndLocation, setPOIType] = props.handlers;
+    const [setStartLocation, setEndLocation] = props.handlers;
     const [chosenPOI, setChosenPOI] = props.chosenPOI
+    const [POIType, setPOIType] = props.POIType
     
     const handleOpen = () => {
         setOpen(true);
@@ -28,15 +30,19 @@ export default function CustomRouteMaker(props) {
         };
 
     function handleSelect(selectedType) {
-        setPOIType(selectedType)
+        if (POIType === selectedType) {
+            setPOIType(null);
+        } else {
+            setPOIType(selectedType);
+        }
     };
 
     return (
         <div>
-            <div id="poi">
+            <div id="add-poi">
                 <SpeedDial
                     ariaLabel="Place of Interest Type SpeedDial"
-                    icon={<SpeedDialIcon />}
+                    icon={ (!POIType && <SpeedDialIcon />) || (POIType === 'tourist_attraction' && <FilterHdr/> ) || (POIType === 'restaurant' && <LocalDining/> ) || (POIType === 'convenience_store' && <Store/> )}
                     className={speedDialClassName}
                     onClose={handleClose}
                     onOpen={handleOpen}
@@ -46,10 +52,10 @@ export default function CustomRouteMaker(props) {
                     {POITypes.map((type) => (
                     <SpeedDialAction
                         key={type.key}
-                        icon={type.icon}
+                        icon={ (POIType !== type.key && type.icon) || (POIType === type.key && <Clear/>)}
                         tooltipTitle={type.name}
                         tooltipPlacement = "right"
-                        tooltipOpen
+                        // tooltipOpen
                         onClick={() => handleSelect(type.key)}
                     />
                     ))}
@@ -63,11 +69,11 @@ export default function CustomRouteMaker(props) {
                 <div className="pac-title">End Point</div>
                 <AutocompleteInput handler={setEndLocation} placeholder={"Enter End Point"}/>
             </div>
-            <div id="poi-container">
+            <Grid id="poi-container">
                 {chosenPOI.map((place) => {
-                    return <PlaceOfInterest key={place.place_id} place={place}/>
+                    return <PlaceOfInterest key={place.place_id} place={place} chosenPOI={[chosenPOI, setChosenPOI]}/>
                 })}
-            </div>
+            </Grid>
         </div>
     )
 }
