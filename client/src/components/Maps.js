@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { GoogleMap, LoadScript, Data, Marker } from '@react-google-maps/api';
-
 const containerStyle = {
   width: "100%",
   height: "100vh"
@@ -24,6 +23,16 @@ function processPoints(geometry, callback, thisArg) {
     });
   }
 }
+
+
+navigator.geolocation.getCurrentPosition(
+      function(position) {
+        console.log(position);
+      },
+      function(error) {
+        console.error("Error Code = " + error.code + " - " + error.message);
+      }
+    );
 
 export default function Maps(props) {
   const [route, setRoute] = props.route
