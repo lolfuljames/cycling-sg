@@ -19,6 +19,14 @@
     left: max(313px, 20%);
 }
 
+#search-route-button {
+    float: right;
+    position: absolute;
+    top: 83vh;
+    left: max(250px, 20%);
+    border-radius: 300px;
+}
+
 #poi-container {
     position: relative;
     top: 50px;
@@ -28,12 +36,6 @@
     position: relative;
     top: -30px;
 }
-
-
-/* .MuiSpeedDial-open {
-    position: relative;
-    right: 90px;
-} */
 
 .MuiSpeedDial-actions {
     position: relative;

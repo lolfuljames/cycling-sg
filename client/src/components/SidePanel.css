@@ -42,11 +42,3 @@
 #side-panel-title {
     font-size: 41px;
 }
-
-#search-route-button {
-    float: right;
-    position: absolute;
-    top: 83vh;
-    left: max(250px, 20%);
-    border-radius: 300px;
-}
