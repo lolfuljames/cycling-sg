@@ -47,15 +47,6 @@ export default function Maps(props) {
   }, [])
 
 
-  // runs this function if user choosers new POI type 
-  useEffect(() => {
-    if (!POIType) {
-      return;
-    }
-    console.log(POIType)
-  }, [POIType])
-
-
   // runs this function if route changes
   useEffect(() => {
     if (features) {
@@ -66,7 +57,6 @@ export default function Maps(props) {
       const routeFeature = data.addGeoJson(route)
       setFeatures(routeFeature)
     }
-    setPOIType(null);
   }, [route])
 
   useEffect(() => {
@@ -112,18 +102,17 @@ export default function Maps(props) {
   }, [])
 
   function handleClickPOI(place) {
-    console.log('this is:', place)
     let index = chosenPOI.findIndex(chosenPlace => chosenPlace === place)
     if (index === -1) {
       // the POI has not been chosen
       setChosenPOI([...chosenPOI, place])
-      console.log('adding place')
     } else {
       // the POI was chosen previously, remove instead
       let new_chosenPOI = [...chosenPOI]
       new_chosenPOI.splice(index, 1)
       setChosenPOI(new_chosenPOI)
     }
+    setPOIType(null);
   }
 
   return (
@@ -146,10 +135,10 @@ export default function Maps(props) {
           <Marker position={startLocation} draggable onDragEnd={handleDragStartLocation}/>
           <Marker position={endLocation} draggable onDragEnd={handleDragEndLocation}/>
           {recPOI.map(place => {
-                return <Marker key={place.place_id} position={place.geometry.location} onClick={() => handleClickPOI(place)}/>
+                return <Marker key={place.place_id} position={place.geometry.location} icon={"rec_POI.svg"} title={place.name} onClick={() => handleClickPOI(place)}/>
             })}
           {chosenPOI.map(place => {
-                return <Marker key={place.place_id} position={place.geometry.location} onClick={() => handleClickPOI(place)}/>
+                return <Marker key={place.place_id} position={place.geometry.location} title={place.name} onClick={() => handleClickPOI(place)}/>
             })}
         </>
       </GoogleMap>

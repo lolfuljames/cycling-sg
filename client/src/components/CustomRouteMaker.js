@@ -16,7 +16,7 @@ const POITypes = [
 export default function CustomRouteMaker(props) {
     const [open, setOpen] = React.useState(false);
     const [speedDialClassName, setSpeedDialClassName] = React.useState(null); 
-    const [setStartLocation, setEndLocation] = props.handlers;
+    const [setStartLocation, setEndLocation, setRecPOI] = props.handlers;
     const [chosenPOI, setChosenPOI] = props.chosenPOI
     const [POIType, setPOIType] = props.POIType
     
@@ -35,6 +35,7 @@ export default function CustomRouteMaker(props) {
         } else {
             setPOIType(selectedType);
         }
+        setRecPOI([]);
     };
 
     return (

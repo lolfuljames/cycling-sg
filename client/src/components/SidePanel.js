@@ -57,6 +57,9 @@ export default function SidePanel(props) {
         setChosenRoute(null)
         setStartLocation(null)
         setEndLocation(null)
+        setRecPOI([]);
+        setChosenPOI([]);
+        setPOIType(null);
     }
 
     function handleSearchCustomRoute() {
@@ -82,7 +85,6 @@ export default function SidePanel(props) {
             // | Only uncomment the code below when you need it for development as each call will be billed accordingly. |
             // --------------------------------------------------WARNING--------------------------------------------------
             if (POIType) {
-                setPOIType(null);
                 let searchCoordinates = res.data.features[0].geometry.coordinates.map(coordinate => {
                     return {lat: coordinate[1], lng: coordinate[0]}
                 })
@@ -104,6 +106,7 @@ export default function SidePanel(props) {
 
     if (mode === 'preset'){
         return (
+
             <div id="side-panel-container">
                 <div id="side-panel">   
                     <div id="side-panel-title">
@@ -122,7 +125,7 @@ export default function SidePanel(props) {
                         {/* Routes */}
                     </div>
                     <Button id="preset-route-transition-button" onClick={handleChangeButton} variant="contained" color="primary"><ArrowBack/>Back</Button>
-                    <CustomRouteMaker POIType={[POIType, setPOIType]} chosenPOI={[chosenPOI, setChosenPOI]} handlers={[setStartLocation, setEndLocation]}/>
+                    <CustomRouteMaker POIType={[POIType, setPOIType]} chosenPOI={[chosenPOI, setChosenPOI]} handlers={[setStartLocation, setEndLocation,setRecPOI]}/>
                     <Button id="search-route-button" onClick={handleSearchCustomRoute} color="primary" variant="contained" component="span">
                         <Search />
                     </Button>
