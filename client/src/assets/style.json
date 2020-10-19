@@ -1,0 +1,11 @@
+[
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#77ff5c"
+      }
+    ]
+  }
+]
