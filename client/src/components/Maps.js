@@ -7,6 +7,8 @@ const containerStyle = {
   height: "100vh"
 };
 
+const mapStyle = require('assets/style.json');
+
 const center = {
   lat: 1.3878,
   lng: 103.8266
@@ -44,6 +46,7 @@ export default function Maps(props) {
     console.log("Maps:", map)
     const bounds = new window.google.maps.LatLngBounds({ lat: 1.17, lng: 103.6 }, { lat: 1.46, lng: 104.1 });
     map.fitBounds(bounds);
+    map.setOptions({styles: mapStyle})
   }, [])
 
 
@@ -56,6 +59,7 @@ export default function Maps(props) {
     if (data){
       const routeFeature = data.addGeoJson(route)
       setFeatures(routeFeature)
+      data.setStyle({strokeColor: 'red'})
     }
   }, [route])
 
@@ -132,8 +136,8 @@ export default function Maps(props) {
           <Data onLoad={onLoadData} onAddFeature={onAddFeatureData}/>
           {/* <Marker position={startLocation} draggable/> */}
           {/* <Marker position={endLocation} draggable/> */}
-          <Marker position={startLocation} draggable onDragEnd={handleDragStartLocation}/>
-          <Marker position={endLocation} draggable onDragEnd={handleDragEndLocation}/>
+          <Marker position={startLocation} draggable onDragEnd={handleDragStartLocation} icon={{ url: require('assets/start.png'), }}/>
+          <Marker position={endLocation} draggable onDragEnd={handleDragEndLocation} icon={{ url: require('assets/end.png'), }}/>
           {recPOI.map(place => {
                 return <Marker key={place.place_id} position={place.geometry.location} icon={"rec_POI.svg"} title={place.name} onClick={() => handleClickPOI(place)}/>
             })}
