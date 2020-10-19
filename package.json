@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "cd client && NPM_CONFIG_PRODUCTION=false npm install && npm run build",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "start": "node server/server.js",
     "frontend": "cd client && npm run start",
     "backend": "cd server && nodemon server"
@@ -24,12 +24,12 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-pino-logger": "^5.0.0",
+    "pino-pretty": "^4.3.0",
     "mongoose": "^5.10.3",
     "pino": "^6.7.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4",
-    "pino-pretty": "^4.3.0"
+    "nodemon": "^2.0.4"
   },
   "description": ""
 }
