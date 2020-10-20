@@ -127,7 +127,7 @@ export default function CustomRouteMaker(props) {
                         key={type.key}
                         icon={ (POIType !== type.key && type.icon) || (POIType === type.key && <Clear/>)}
                         tooltipTitle={type.name}
-                        tooltipPlacement = "right"
+                        tooltipPlacement = "left"
                         // tooltipOpen
                         onClick={() => handleSelect(type.key)}
                     />
