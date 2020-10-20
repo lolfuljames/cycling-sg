@@ -19,7 +19,7 @@ export default function SidePanel(props) {
     const [POIType, setPOIType] = props.POIType;
     const [recPOI, setRecPOI] = props.recPOI
     const [chosenPOI, setChosenPOI] = props.chosenPOI
-    const [show, setShow] = useState(false)
+    const [showUi, setShow] = useState(false)
 
 
     const [tutorial, setTut] = useState(false)
@@ -116,7 +116,7 @@ export default function SidePanel(props) {
                     <Button id="custom-route-transition-button" onClick={handleChangeButton} variant="contained" color="primary">Custom Route<Add /></Button>
                     <PresetList presetList={presetList} handlers={[chosenRoute,setChosenRoute, setStartLocation, setEndLocation]}/>
                 </div>
-                <Button id="hide-button" onClick={toggleUi} variant="contained" color="primary">{show ? <Visibility /> : <VisibilityOff /> }</Button>
+                <Button id="hide-button" onClick={toggleUi} variant="contained" color="primary">{showUi ? <Visibility /> : <VisibilityOff /> }</Button>
             </div>
         )
     } else {
@@ -132,7 +132,7 @@ export default function SidePanel(props) {
                     <CustomRouteMaker recPOI={[recPOI, setRecPOI]} chosenRoute={[chosenRoute,setChosenRoute]} POIType={[POIType, setPOIType]} chosenPOI={[chosenPOI, setChosenPOI]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation,setEndLocation]} recPOI={[recPOI, setRecPOI]}/>
                     {/* <PresetList presetList={presetList}/> */}
                 </div>
-                <Button id="hide-button" onClick={toggleUi} variant="contained" color="primary">{show ? <Visibility /> : <VisibilityOff /> }</Button>
+                <Button id="hide-button" onClick={toggleUi} variant="contained" color="primary">{showUi ? <Visibility /> : <VisibilityOff /> }</Button>
             </div>
         )
     }
