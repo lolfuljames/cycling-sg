@@ -34,6 +34,7 @@ app.use(express.json());
 app.use('/poi', require('./routes/poiRoutes'));
 app.use('/preset', require('./routes/presetRoutes'));
 app.use('/test', require('./routes/testRoutes'));
+app.use('/boundary', require('./routes/mapBoundary'));
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
