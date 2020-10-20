@@ -10,7 +10,7 @@
     left: 15px;
     box-shadow: 0 2px 6px gray;
     background: white;
-    width: max(300px, 20%);
+    width: max(290px, 20%);
     height: 85vh;
     border-radius: 25px;
     padding: 20px;
@@ -19,7 +19,7 @@
 
 #custom-route-transition-button {
     position: relative;
-    left: max(70px, 20%);
+    left: max(40px, 20%);
     /* float: right; */
     /* top: -35px; */
     border-radius: 100px;
