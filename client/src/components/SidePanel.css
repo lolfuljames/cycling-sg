@@ -62,14 +62,11 @@
 }
 
 #hide-button {
-    position: fixed;
-    bottom:10%;
-    left:30px;
-    /* float: right; */
-    border-radius: 100px;
-    box-shadow: 0 2px 6px gray;
-    /* background: #33AC94;
-    color: white; */
+    float: right;
+    position: absolute;
+    top: 85vh;
+    left: 40px;
+    border-radius: 300px;
 }
 
 #side-panel-title {
