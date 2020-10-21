@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { GoogleMap, LoadScript, Data, Marker } from '@react-google-maps/api';
 const containerStyle = {
   width: "100%",
@@ -24,16 +24,6 @@ function processPoints(geometry, callback, thisArg) {
   }
 }
 
-
-navigator.geolocation.getCurrentPosition(
-      function(position) {
-        console.log(position);
-      },
-      function(error) {
-        console.error("Error Code = " + error.code + " - " + error.message);
-      }
-    );
-
 export default function Maps(props) {
   const [route, setRoute] = props.route
   const [startLocation, setStartLocation] = props.startLocation
@@ -41,6 +31,18 @@ export default function Maps(props) {
   const [map, setMap] = React.useState(null)
   const [data, setData] = React.useState(null)
   const [features, setFeatures] = React.useState(null)
+  const[usergps, setusergps] = useState(null)
+
+  navigator.geolocation.getCurrentPosition(
+      function(position) {
+        console.log(position);
+        setusergps( {lon : position.coords.longtitude, lat : position.coords.latitude})
+        console.log("CANCERISNEAR", usergps.lon)
+      },
+      function(error) {
+        console.error("Error Code = " + error.code + " - " + error.message);
+      }
+    );
 
   const onLoad = React.useCallback(function callback(map) {
     setMap(map)
