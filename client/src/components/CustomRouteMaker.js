@@ -105,6 +105,9 @@ export default function CustomRouteMaker(props) {
             //     setRecPOI([]);
             // }
         }).catch(err => {
+            if (err.response.status === 404) {
+                window.alert("No route can be generated, please select another start location or end location.")
+            }
             console.log(err);
         });
 
