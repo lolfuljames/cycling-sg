@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './SidePanel.css';
 import PresetList from './PresetList'
 import CustomRouteMaker from './CustomRouteMaker'
-import { Add,ArrowBack }  from '@material-ui/icons';
-import HelpIcon from '@material-ui/icons/Help';
+import { Add,ArrowBack,Visibility,VisibilityOff,Help }  from '@material-ui/icons';
 import { Button } from '@material-ui/core';
 
 import axios from 'axios';
@@ -20,6 +19,7 @@ export default function SidePanel(props) {
     const [POIType, setPOIType] = props.POIType;
     const [recPOI, setRecPOI] = props.recPOI
     const [chosenPOI, setChosenPOI] = props.chosenPOI
+    const [showUi, setUi] = useState(true)
 
 
     const [tutorial, setTut] = useState(false)
@@ -31,6 +31,10 @@ export default function SidePanel(props) {
         {
             element: '.presetRoute',
             intro: 'Click here for some routes near you',
+        },
+        {
+            element: '#hide-button',
+            intro: 'Click here to hide the UI',
         },
         {
             element: '#custom-route-transition-button',
@@ -64,6 +68,20 @@ export default function SidePanel(props) {
         setTut(true)
     }
 
+    function toggleUi() {
+        var x = document.getElementById("side-panel");
+        if (showUi) {
+          x.style.display = "none";
+          setUi(false);
+        } else {
+          x.style.display = "block";
+          setUi(true);
+        }
+      }
+
+
+
+
     // Fetch preset route from database through backend and populate presetList on init
     useEffect(() => {
         axios.get('/preset/getRoutes').then(res => {
@@ -88,15 +106,17 @@ export default function SidePanel(props) {
     if (mode === 'preset'){
         return (
             <div id="side-panel-container">
-                <div id="side-panel">   
+                
+                <div id="side-panel">
                     <div id="side-panel-title">
                         {/* Routes */}
                     </div>
                     <Steps enabled={tutorial} steps={steps} initialStep={0} onExit={hideTut}/>
-                    <Button id="help-button" onClick={showTut} variant="contained" color="primary"><HelpIcon/></Button>
+                    <Button id="help-button" onClick={showTut} variant="contained" color="primary"><Help/></Button>
                     <Button id="custom-route-transition-button" onClick={handleChangeButton} variant="contained" color="primary">Custom Route<Add /></Button>
                     <PresetList presetList={presetList} handlers={[chosenRoute,setChosenRoute, setStartLocation, setEndLocation]}/>
                 </div>
+                <Button id="hide-button" onClick={toggleUi} variant="contained" color="primary">{showUi ? <VisibilityOff /> : <Visibility /> }</Button>
             </div>
         )
     } else {
@@ -108,10 +128,11 @@ export default function SidePanel(props) {
                     </div>
                     <Steps enabled={tutorial} steps={stepsCustom} initialStep={0} onExit={hideTut}/>
                     <Button id="preset-route-transition-button" onClick={handleChangeButton} variant="contained" color="primary"><ArrowBack/>Back</Button>
-                    <Button id="custom-help-button" onClick={showTut} variant="contained" color="primary"><HelpIcon/></Button>
+                    <Button id="custom-help-button" onClick={showTut} variant="contained" color="primary"><Help/></Button>
                     <CustomRouteMaker recPOI={[recPOI, setRecPOI]} chosenRoute={[chosenRoute,setChosenRoute]} POIType={[POIType, setPOIType]} chosenPOI={[chosenPOI, setChosenPOI]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation,setEndLocation]} recPOI={[recPOI, setRecPOI]}/>
                     {/* <PresetList presetList={presetList}/> */}
                 </div>
+                <Button id="hide-button" onClick={toggleUi} variant="contained" color="primary">{showUi ? <VisibilityOff /> : <Visibility /> }</Button>
             </div>
         )
     }
