@@ -1,6 +1,6 @@
 import React from 'react'
 import AutocompleteInput from './AutocompleteInput'
-import './CustomRouteMaker.css'
+import './CustomRouteManager.css'
 import { SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab'
 import { LocalDining, Search, FilterHdr, Store, Clear } from '@material-ui/icons'
 import { Grid, Button } from '@material-ui/core'
@@ -40,7 +40,7 @@ const getRouteGeoJSON = coordinates => {
 const getPOIs = (coordinates, POIType) => axios.post('/poi/poiRec', { coordinates: coordinates, radius: 1500, type: POIType })
 
 
-export default function CustomRouteMaker(props) {
+export default function CustomRouteManager(props) {
     const [open, setOpen] = React.useState(false);
     const [speedDialClassName, setSpeedDialClassName] = React.useState(null); 
     const [chosenRoute, setChosenRoute] = props.chosenRoute

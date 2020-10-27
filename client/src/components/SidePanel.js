@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './SidePanel.css';
-import PresetList from './PresetList'
-import CustomRouteMaker from './CustomRouteMaker'
+import PresetRouteManager from './PresetRouteManager'
+import CustomRouteManager from './CustomRouteManager'
 import { Add,ArrowBack,Visibility,VisibilityOff,Help }  from '@material-ui/icons';
 import { Button } from '@material-ui/core';
 
@@ -114,7 +114,7 @@ export default function SidePanel(props) {
                     <Steps enabled={tutorial} steps={steps} initialStep={0} onExit={hideTut}/>
                     <Button id="help-button" onClick={showTut} variant="contained" color="primary"><Help/></Button>
                     <Button id="custom-route-transition-button" onClick={handleChangeButton} variant="contained" color="primary">Custom Route<Add /></Button>
-                    <PresetList presetList={presetList} handlers={[chosenRoute,setChosenRoute, setStartLocation, setEndLocation]}/>
+                    <PresetRouteManager presetList={presetList} handlers={[chosenRoute,setChosenRoute, setStartLocation, setEndLocation]}/>
                 </div>
                 <Button id="hide-button" onClick={toggleUi} variant="contained" color="primary">{showUi ? <VisibilityOff /> : <Visibility /> }</Button>
             </div>
@@ -129,7 +129,7 @@ export default function SidePanel(props) {
                     <Steps enabled={tutorial} steps={stepsCustom} initialStep={0} onExit={hideTut}/>
                     <Button id="preset-route-transition-button" onClick={handleChangeButton} variant="contained" color="primary"><ArrowBack/>Back</Button>
                     <Button id="custom-help-button" onClick={showTut} variant="contained" color="primary"><Help/></Button>
-                    <CustomRouteMaker recPOI={[recPOI, setRecPOI]} chosenRoute={[chosenRoute,setChosenRoute]} POIType={[POIType, setPOIType]} chosenPOI={[chosenPOI, setChosenPOI]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation,setEndLocation]} recPOI={[recPOI, setRecPOI]}/>
+                    <CustomRouteManager recPOI={[recPOI, setRecPOI]} chosenRoute={[chosenRoute,setChosenRoute]} POIType={[POIType, setPOIType]} chosenPOI={[chosenPOI, setChosenPOI]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation,setEndLocation]} recPOI={[recPOI, setRecPOI]}/>
                     {/* <PresetList presetList={presetList}/> */}
                 </div>
                 <Button id="hide-button" onClick={toggleUi} variant="contained" color="primary">{showUi ? <VisibilityOff /> : <Visibility /> }</Button>
