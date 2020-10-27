@@ -26,7 +26,7 @@ export default function SidePanel(props) {
     const steps= [
         {
             element: '#help-button',
-            intro: 'This is the help button',
+            intro: 'Click this to start this tutorial again',
         },
         {
             element: '.presetRoute',
@@ -45,19 +45,19 @@ export default function SidePanel(props) {
     const stepsCustom= [
         {
             element: '[placeholder="Enter Start Point"]',
-            intro: 'Enter your Start point',
+            intro: 'Enter your Start point, a draggable waypoint will appear on the map to fine-tune the location!',
         },
         {
             element: '[placeholder="Enter End Point"]',
-            intro: 'Enter your End point, you can drag the waypoint to fine tune your location too!',
+            intro: 'Enter your End point, a draggable waypoint will appear on the map to fine-tune the location!',
         },
         {
             element: '[aria-label="Place of Interest Type SpeedDial"]',
-            intro: 'Click here to add stops inbetween your destinations',
+            intro: 'Click here to select categories for a detour in-between your destinations, then press the search button! ',
         },
         {
             element: '#search-route-button',
-            intro: 'Click here to find your route',
+            intro: 'Click here to find your route! It also shows our recommended places you should visit if you chose a detour category in step 3!',
         },
     ]
 
