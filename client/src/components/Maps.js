@@ -49,6 +49,19 @@ export default function Maps(props) {
     map.setOptions({styles: mapStyle})
   }, [])
 
+  const [userloc, setloc] = React.useState('lat')
+  navigator.geolocation.getCurrentPosition(function(position) {
+        console.log(position);
+        setloc({ 
+          lon : position.coords.longitude, 
+          lat : position.coords.latitude
+        });
+        console.log("this is user location: Lat is " + userloc.lat +  " user long is " + userloc.lon);
+      },
+      function(error) {
+        console.error("Error Code = " + error.code + " - " + error.message);
+      }
+    );
 
   // runs this function if route changes
   useEffect(() => {
