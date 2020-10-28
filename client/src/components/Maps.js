@@ -24,6 +24,8 @@ function processPoints(geometry, callback, thisArg) {
   }
 }
 
+
+
 export default function Maps(props) {
   const [route, setRoute] = props.route
   const [startLocation, setStartLocation] = props.startLocation
@@ -51,6 +53,27 @@ export default function Maps(props) {
     map.fitBounds(bounds);
   }, [])
 
+<<<<<<< Updated upstream
+=======
+
+ //function to get user current location
+const [userloc, setloc] = React.useState('lat')
+navigator.geolocation.getCurrentPosition(function(position) {
+      console.log(position);
+      setloc({ 
+        lon : position.coords.longitude, 
+        lat : position.coords.latitude
+      });
+     console.log("this is dasdebug: Lat is " + userloc.lat +  " user long is " + userloc.lon);
+    },
+    function(error) {
+      console.error("Error Code = " + error.code + " - " + error.message);
+   }
+  );
+
+
+  // runs this function if route changes
+>>>>>>> Stashed changes
   useEffect(() => {
     if (features) {
       for (var i = 0; i < features.length; i++)
