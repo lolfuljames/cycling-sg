@@ -1,8 +1,8 @@
 import React from 'react'
 import PresetRoute from './PresetRoute'
-import './PresetList.css'
+import './PresetRouteManager.css'
 
-export default function PresetList( {presetList, handlers}) {
+export default function PresetRouteManager( {presetList, handlers}) {
     return (
         <div className='presetList'>
             {presetList.map(presetRoute => {

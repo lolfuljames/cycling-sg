@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './SidePanel.css';
-import PresetList from './PresetList'
-import CustomRouteMaker from './CustomRouteMaker'
+import PresetRouteManager from './PresetRouteManager'
+import CustomRouteManager from './CustomRouteManager'
 import { Add,ArrowBack,Visibility,VisibilityOff,Help }  from '@material-ui/icons';
 import { Button } from '@material-ui/core';
 
@@ -26,7 +26,7 @@ export default function SidePanel(props) {
     const steps= [
         {
             element: '#help-button',
-            intro: 'This is the help button',
+            intro: 'Click this to start this tutorial again',
         },
         {
             element: '.presetRoute',
@@ -45,19 +45,19 @@ export default function SidePanel(props) {
     const stepsCustom= [
         {
             element: '[placeholder="Enter Start Point"]',
-            intro: 'Enter your Start point',
+            intro: 'Enter your Start point, a draggable waypoint will appear on the map to fine-tune the location!',
         },
         {
             element: '[placeholder="Enter End Point"]',
-            intro: 'Enter your End point, you can drag the waypoint to fine tune your location too!',
+            intro: 'Enter your End point, a draggable waypoint will appear on the map to fine-tune the location!',
         },
         {
             element: '[aria-label="Place of Interest Type SpeedDial"]',
-            intro: 'Click here to add stops inbetween your destinations',
+            intro: 'Click here to select categories for a detour in-between your destinations, then press the search button! ',
         },
         {
             element: '#search-route-button',
-            intro: 'Click here to find your route',
+            intro: 'Click here to find your route! It also shows our recommended places you should visit if you chose a detour category in step 3!',
         },
     ]
 
@@ -114,7 +114,7 @@ export default function SidePanel(props) {
                     <Steps enabled={tutorial} steps={steps} initialStep={0} onExit={hideTut}/>
                     <Button id="help-button" onClick={showTut} variant="contained" color="primary"><Help/></Button>
                     <Button id="custom-route-transition-button" onClick={handleChangeButton} variant="contained" color="primary">Custom Route<Add /></Button>
-                    <PresetList presetList={presetList} handlers={[chosenRoute,setChosenRoute, setStartLocation, setEndLocation]}/>
+                    <PresetRouteManager presetList={presetList} handlers={[chosenRoute,setChosenRoute, setStartLocation, setEndLocation]}/>
                 </div>
                 <Button id="hide-button" onClick={toggleUi} variant="contained" color="primary">{showUi ? <VisibilityOff /> : <Visibility /> }</Button>
             </div>
@@ -129,7 +129,7 @@ export default function SidePanel(props) {
                     <Steps enabled={tutorial} steps={stepsCustom} initialStep={0} onExit={hideTut}/>
                     <Button id="preset-route-transition-button" onClick={handleChangeButton} variant="contained" color="primary"><ArrowBack/>Back</Button>
                     <Button id="custom-help-button" onClick={showTut} variant="contained" color="primary"><Help/></Button>
-                    <CustomRouteMaker recPOI={[recPOI, setRecPOI]} chosenRoute={[chosenRoute,setChosenRoute]} POIType={[POIType, setPOIType]} chosenPOI={[chosenPOI, setChosenPOI]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation,setEndLocation]} recPOI={[recPOI, setRecPOI]}/>
+                    <CustomRouteManager recPOI={[recPOI, setRecPOI]} chosenRoute={[chosenRoute,setChosenRoute]} POIType={[POIType, setPOIType]} chosenPOI={[chosenPOI, setChosenPOI]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation,setEndLocation]} recPOI={[recPOI, setRecPOI]}/>
                     {/* <PresetList presetList={presetList}/> */}
                 </div>
                 <Button id="hide-button" onClick={toggleUi} variant="contained" color="primary">{showUi ? <VisibilityOff /> : <Visibility /> }</Button>
