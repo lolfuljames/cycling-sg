@@ -31,7 +31,7 @@ function App() {
   return (
     <div>
       <Maps userLocation={[userLocation, setUserLocation]} chosenPOI={[chosenPOI, setChosenPOI]} recPOI={[recPOI, setRecPOI]} POIType={[POIType, setPOIType]} route={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation, setEndLocation]}/>
-      <SidePanel chosenPOI={[chosenPOI, setChosenPOI]} recPOI={[recPOI, setRecPOI]} POIType={[POIType, setPOIType]} chosenRoute={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation,setEndLocation]}/>
+      <SidePanel userLocation={userLocation} chosenPOI={[chosenPOI, setChosenPOI]} recPOI={[recPOI, setRecPOI]} POIType={[POIType, setPOIType]} chosenRoute={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation,setEndLocation]}/>
     </div>
   );
 }
