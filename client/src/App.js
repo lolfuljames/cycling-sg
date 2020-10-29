@@ -26,11 +26,12 @@ function App() {
   const [recPOI, setRecPOI] = useState([]);
   const [chosenPOI, setChosenPOI] = useState([]);
   const [POIType, setPOIType] = useState(null);
+  const [userLocation, setUserLocation] = React.useState(null);
 
   return (
     <div>
-      <Maps chosenPOI={[chosenPOI, setChosenPOI]} recPOI={[recPOI, setRecPOI]} POIType={[POIType, setPOIType]} route={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation, setEndLocation]}/>
-      <SidePanel chosenPOI={[chosenPOI, setChosenPOI]} recPOI={[recPOI, setRecPOI]} POIType={[POIType, setPOIType]} chosenRoute={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation,setEndLocation]}/>
+      <Maps userLocation={[userLocation, setUserLocation]} chosenPOI={[chosenPOI, setChosenPOI]} recPOI={[recPOI, setRecPOI]} POIType={[POIType, setPOIType]} route={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation, setEndLocation]}/>
+      <SidePanel userLocation={userLocation} chosenPOI={[chosenPOI, setChosenPOI]} recPOI={[recPOI, setRecPOI]} POIType={[POIType, setPOIType]} chosenRoute={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation,setEndLocation]}/>
     </div>
   );
 }

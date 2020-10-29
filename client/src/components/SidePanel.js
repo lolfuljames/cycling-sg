@@ -19,6 +19,7 @@ export default function SidePanel(props) {
     const [POIType, setPOIType] = props.POIType;
     const [recPOI, setRecPOI] = props.recPOI
     const [chosenPOI, setChosenPOI] = props.chosenPOI
+    const userLocation = props.userLocation;
     const [showUi, setUi] = useState(true)
 
 

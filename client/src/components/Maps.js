@@ -35,7 +35,7 @@ export default function Maps(props) {
   const [recPOI, setRecPOI] = props.recPOI
   const [POIType, setPOIType] = props.POIType
   const [chosenPOI, setChosenPOI] = props.chosenPOI
-
+  const [userLocation, setUserLocation] = props.userLocation
   
   const [map, setMap] = React.useState(null)
   const [data, setData] = React.useState(null)
@@ -47,21 +47,22 @@ export default function Maps(props) {
     const bounds = new window.google.maps.LatLngBounds({ lat: 1.17, lng: 103.6 }, { lat: 1.46, lng: 104.1 });
     map.fitBounds(bounds);
     map.setOptions({styles: mapStyle})
+    navigator.geolocation.watchPosition(updateCurrentPosition, handleError);
   }, [])
 
-  const [userloc, setloc] = React.useState('lat')
-  navigator.geolocation.getCurrentPosition(function(position) {
-        console.log(position);
-        setloc({ 
-          lon : position.coords.longitude, 
-          lat : position.coords.latitude
-        });
-        console.log("this is user location: Lat is " + userloc.lat +  " user long is " + userloc.lon);
-      },
-      function(error) {
-        console.error("Error Code = " + error.code + " - " + error.message);
-      }
-    );
+  function updateCurrentPosition(position) {
+    console.log("Updating user location...");
+    if (!userLocation || (position.coords.longitude !== userLocation.lng) || (position.coords.latitude !== userLocation.lat)){
+      setUserLocation({ 
+        lng : position.coords.longitude, 
+        lat : position.coords.latitude
+      });
+    }
+  }
+    
+  function handleError(error) {
+      console.error("Error Code = " + error.code + " - " + error.message);
+  }
 
   // runs this function if route changes
   useEffect(() => {
@@ -151,6 +152,7 @@ export default function Maps(props) {
           {/* <Marker position={endLocation} draggable/> */}
           <Marker position={startLocation} draggable onDragEnd={handleDragStartLocation} icon={{ url: require('assets/start.png'), }}/>
           <Marker position={endLocation} draggable onDragEnd={handleDragEndLocation} icon={{ url: require('assets/end.png'), }}/>
+          <Marker position={userLocation}/>
           {recPOI.map(place => {
                 return <Marker key={place.place_id} position={place.geometry.location} icon={"rec_POI.svg"} title={place.name} onClick={() => handleClickPOI(place)}/>
             })}
