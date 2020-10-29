@@ -6,7 +6,7 @@
     justify-content: space-between; */
     border-radius: 10px;
     background-color: #f9f9f9;
-    margin: 10px 0 0 0;
+    margin: 7px 5px 3px 5px;
 }
 
 .active-preset-route {
@@ -25,4 +25,8 @@
 }
 .routeCalories {
     flex: 1 1 0;
+}
+
+.MuiPaper-elevation1 {
+    box-shadow: none !important;
 }
