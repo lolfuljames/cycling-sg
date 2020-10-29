@@ -21,12 +21,12 @@ const theme = createMuiTheme({
 
 function App() {
   const [chosenRoute, setChosenRoute] = useState(null);
-  const [startLocation, setStartLocation] = useState({lat: null, lng: null});
-  const [endLocation, setEndLocation] = useState({lat: null, lng: null});
+  const [startLocation, setStartLocation] = useState(null);
+  const [endLocation, setEndLocation] = useState(null);
   const [recPOI, setRecPOI] = useState([]);
   const [chosenPOI, setChosenPOI] = useState([]);
   const [POIType, setPOIType] = useState(null);
-  const [userLocation, setUserLocation] = React.useState({lat: null, lng: null});
+  const [userLocation, setUserLocation] = React.useState(null);
 
   return (
     <div>
