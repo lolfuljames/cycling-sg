@@ -51,13 +51,12 @@ export default function Maps(props) {
   }, [])
 
   function updateCurrentPosition(position) {
-    console.log("geolocation called");
-    if (!userLocation || (position.coords.longitude !== userLocation.lng) || (position.coords.latitude !== userLocation.lat)){
+    console.log("Updating user location...");
+    if (!userLocation || ((position.coords.longitude !== userLocation.lng) || (position.coords.latitude !== userLocation.lat))){
       setUserLocation({ 
         lng : position.coords.longitude, 
         lat : position.coords.latitude
       });
-    console.log("this is user location: Lat is " + userLocation.lat +  " user long is " + userLocation.lng);
     }
   }
     
