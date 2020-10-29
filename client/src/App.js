@@ -21,15 +21,16 @@ const theme = createMuiTheme({
 
 function App() {
   const [chosenRoute, setChosenRoute] = useState(null);
-  const [startLocation, setStartLocation] = useState(null);
-  const [endLocation, setEndLocation] = useState(null);
+  const [startLocation, setStartLocation] = useState({lat: null, lng: null});
+  const [endLocation, setEndLocation] = useState({lat: null, lng: null});
   const [recPOI, setRecPOI] = useState([]);
   const [chosenPOI, setChosenPOI] = useState([]);
   const [POIType, setPOIType] = useState(null);
+  const [userLocation, setUserLocation] = React.useState({lat: null, lng: null});
 
   return (
     <div>
-      <Maps chosenPOI={[chosenPOI, setChosenPOI]} recPOI={[recPOI, setRecPOI]} POIType={[POIType, setPOIType]} route={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation, setEndLocation]}/>
+      <Maps userLocation={[userLocation, setUserLocation]} chosenPOI={[chosenPOI, setChosenPOI]} recPOI={[recPOI, setRecPOI]} POIType={[POIType, setPOIType]} route={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation, setEndLocation]}/>
       <SidePanel chosenPOI={[chosenPOI, setChosenPOI]} recPOI={[recPOI, setRecPOI]} POIType={[POIType, setPOIType]} chosenRoute={[chosenRoute, setChosenRoute]} startLocation={[startLocation, setStartLocation]} endLocation={[endLocation,setEndLocation]}/>
     </div>
   );

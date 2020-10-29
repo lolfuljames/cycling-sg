@@ -35,7 +35,7 @@ export default function Maps(props) {
   const [recPOI, setRecPOI] = props.recPOI
   const [POIType, setPOIType] = props.POIType
   const [chosenPOI, setChosenPOI] = props.chosenPOI
-
+  const [userLocation, setUserLocation] = props.userLocation
   
   const [map, setMap] = React.useState(null)
   const [data, setData] = React.useState(null)
@@ -49,19 +49,20 @@ export default function Maps(props) {
     map.setOptions({styles: mapStyle})
   }, [])
 
-  const [userloc, setloc] = React.useState('lat')
   navigator.geolocation.getCurrentPosition(function(position) {
-        console.log(position);
-        setloc({ 
-          lon : position.coords.longitude, 
-          lat : position.coords.latitude
-        });
-        console.log("this is user location: Lat is " + userloc.lat +  " user long is " + userloc.lon);
-      },
-      function(error) {
-        console.error("Error Code = " + error.code + " - " + error.message);
-      }
-    );
+    console.log(position);
+    if ((position.coords.longitude !== userLocation.lng) || (position.coords.latitude !== userLocation.lat)){
+      setUserLocation({ 
+        lng : position.coords.longitude, 
+        lat : position.coords.latitude
+      });
+    console.log("this is user location: Lat is " + userLocation.lat +  " user long is " + userLocation.lng);
+    } 
+  },
+    function(error) {
+      console.error("Error Code = " + error.code + " - " + error.message);
+    }
+  );
 
   // runs this function if route changes
   useEffect(() => {
