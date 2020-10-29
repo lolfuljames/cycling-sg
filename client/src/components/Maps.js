@@ -52,7 +52,7 @@ export default function Maps(props) {
 
   function updateCurrentPosition(position) {
     console.log("Updating user location...");
-    if (!userLocation || ((position.coords.longitude !== userLocation.lng) || (position.coords.latitude !== userLocation.lat))){
+    if (!userLocation || (position.coords.longitude !== userLocation.lng) || (position.coords.latitude !== userLocation.lat)){
       setUserLocation({ 
         lng : position.coords.longitude, 
         lat : position.coords.latitude
@@ -135,7 +135,7 @@ export default function Maps(props) {
 
   return (
     <LoadScript
-      googleMapsApiKey="AIzaSyDXyYgpyHPB77RyblUo6jF7WDMLfH0VeS0"    
+      googleMapsApiKey="AIzaSyDXyYgpyHPB77RyblUo6jF7WDMLfH0VeS0"
       libraries={libraries}
     >
       <GoogleMap
