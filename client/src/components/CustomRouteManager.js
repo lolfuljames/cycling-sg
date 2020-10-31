@@ -90,20 +90,20 @@ export default function CustomRouteManager(props) {
             // --------------------------------------------------WARNING--------------------------------------------------
             // | Only uncomment the code below when you need it for development as each call will be billed accordingly. |
             // --------------------------------------------------WARNING--------------------------------------------------
-            // if (POIType) {
-            //     let searchCoordinates = res.data.features[0].geometry.coordinates.map(coordinate => {
-            //         return {lat: coordinate[1], lng: coordinate[0]}
-            //     })
-            //     searchCoordinates = searchCoordinates.filter((coordinate, index) => index % 100 === 0)
-            //     getPOIs(searchCoordinates, POIType).then(res => {
-            //         console.log("POI: ", res.data);
-            //         setRecPOI(res.data);
-            //     }).catch(err => {
-            //         console.log(err);
-            //     })
-            // } else {
-            //     setRecPOI([]);
-            // }
+             if (POIType) {
+                 let searchCoordinates = res.data.features[0].geometry.coordinates.map(coordinate => {
+                     return {lat: coordinate[1], lng: coordinate[0]}
+                 })
+                 searchCoordinates = searchCoordinates.filter((coordinate, index) => index % 100 === 0)
+                 getPOIs(searchCoordinates, POIType).then(res => {
+                     console.log("POI: ", res.data);
+                     setRecPOI(res.data);
+                 }).catch(err => {
+                     console.log(err);
+                 })
+             } else {
+                 setRecPOI([]);
+             }
         }).catch(err => {
             if (err.response.status === 404) {
                 window.alert("No route can be generated, please select another start location or end location.")
