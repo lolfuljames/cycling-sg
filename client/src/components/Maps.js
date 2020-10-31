@@ -152,7 +152,7 @@ export default function Maps(props) {
           {/* <Marker position={endLocation} draggable/> */}
           <Marker position={startLocation} draggable onDragEnd={handleDragStartLocation} icon={{ url: require('assets/start.png'), }}/>
           <Marker position={endLocation} draggable onDragEnd={handleDragEndLocation} icon={{ url: require('assets/end.png'), }}/>
-          <Marker position={userLocation}/>
+          <Marker position={userLocation} icon={{ url: require('assets/user.png'), }} />
           {recPOI.map(place => {
                 return <Marker key={place.place_id} position={place.geometry.location} icon={"rec_POI.svg"} title={place.name} onClick={() => handleClickPOI(place)}/>
             })}
