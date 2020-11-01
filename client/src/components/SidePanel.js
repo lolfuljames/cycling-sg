@@ -21,10 +21,10 @@ export default function SidePanel(props) {
     const [chosenPOI, setChosenPOI] = props.chosenPOI
     const userLocation = props.userLocation;
     const [showUi, setUi] = useState(true)
-
+    const [presetRouteLoaded, setLoaded] = useState(false);
 
     const [tutorial, setTut] = useState(false)
-    const steps= [
+    const steps = [
         {
             element: '#help-button',
             intro: 'Click this to start this tutorial again',
@@ -80,13 +80,28 @@ export default function SidePanel(props) {
         }
       }
 
-
+    useEffect(() => {
+        if (!userLocation || presetRouteLoaded || presetList.length === 0) {
+            return;
+        }
+        let sortedPresetList = [...presetList];
+        sortedPresetList.sort(function (a, b) {
+            return (Math.pow(userLocation.lat - a.startLocation.lat, 2) + Math.pow(userLocation.lng - a.startLocation.lng, 2)) - (Math.pow(userLocation.lat - b.startLocation.lat,2) + Math.pow(userLocation.lng - b.startLocation.lng,2));
+        })
+        setPresetList(sortedPresetList);
+        setLoaded(true);
+    }, [userLocation])
 
 
     // Fetch preset route from database through backend and populate presetList on init
     useEffect(() => {
         axios.get('/preset/getRoutes').then(res => {
             setPresetList(res.data);
+            // while(!userLocation) {
+            //     console.log('wait');
+            //     await new Promise(r => setTimeout(r, 500));
+            // }
+            // console.log('done');
         }).catch(err => {
             console.log(err);
         })
