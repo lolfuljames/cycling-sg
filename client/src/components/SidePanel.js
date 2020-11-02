@@ -81,7 +81,7 @@ export default function SidePanel(props) {
       }
     
 
-    // sorts preset list when userLocation is available, only runs once per lifecycle
+    // sorts preset list when userLocation is available, only runs once per session
     useEffect(() => {
         if (!userLocation || presetRouteLoaded || presetList.length === 0) {
             return;
