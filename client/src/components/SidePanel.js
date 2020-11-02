@@ -79,12 +79,15 @@ export default function SidePanel(props) {
           setUi(true);
         }
       }
+    
 
+    // sorts preset list when userLocation is available, only runs once per lifecycle
     useEffect(() => {
         if (!userLocation || presetRouteLoaded || presetList.length === 0) {
             return;
         }
         let sortedPresetList = [...presetList];
+        // sort according to shortest distance
         sortedPresetList.sort(function (a, b) {
             return (Math.pow(userLocation.lat - a.startLocation.lat, 2) + Math.pow(userLocation.lng - a.startLocation.lng, 2)) - (Math.pow(userLocation.lat - b.startLocation.lat,2) + Math.pow(userLocation.lng - b.startLocation.lng,2));
         })
